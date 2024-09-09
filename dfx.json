@@ -1,0 +1,26 @@
+{
+  "canisters": {
+    "gift_care_backend": {
+      "main": "src/gift_care_backend/main.mo",
+      "type": "motoko"
+    },
+    "gift_care_frontend": {
+      "dependencies": [
+        "gift_care_backend"
+      ],
+      "source": [
+        "src/gift_care_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "gift_care_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
