@@ -17,8 +17,10 @@
   ],
   "dependencies": {
     "@dfinity/agent": "^2.1.1",
+    "@dfinity/auth-client": "^2.1.1",
     "@dfinity/candid": "^2.1.1",
     "@dfinity/principal": "^2.1.1",
-    "ipfs-http-client": "^60.0.1"
+    "ipfs-http-client": "^60.0.1",
+    "react-router-dom": "^6.26.2"
   }
 }

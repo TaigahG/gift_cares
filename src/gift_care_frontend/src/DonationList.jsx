@@ -4,7 +4,7 @@ import { idlFactory as donation_idl } from '../../declarations/gift_care_backend
 import { canisterId as donation_canisterId } from '../../declarations/gift_care_backend'; 
 
 // Create an agent and actor
-const agent = new HttpAgent();
+const agent = new HttpAgent({ host: "http://localhost:4943" });
 agent.fetchRootKey();
 const donationActor = Actor.createActor(donation_idl, {
   agent,
@@ -16,21 +16,25 @@ console.log("Donation Actor: ", donationActor);
 
 function DonationList() {
     const [requests, setRequests] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const fetchRequests = async () => {
+      // setLoading(true);
+      try {
+        const result = await donationActor.getRequests();  
+        console.log("Fetched requests:", result);  
+        setRequests(result);
+        // setLoading(false);
+      } catch (error) {
+        console.error("Error fetching requests:", error);
+      }
+    };
 
     useEffect(() => {
-      const fetchRequests = async () => {
-        try {
-          const result = await donationActor.getRequests();  
-          console.log("Fetched requests:", result);  
-          setRequests(result);
-        } catch (error) {
-          console.error("Error fetching requests:", error);
-        }
-      };
   
       fetchRequests();
     }, []);
-
+    
     return (
         <div>
           <h2>All Donation Requests</h2>
