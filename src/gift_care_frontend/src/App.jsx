@@ -4,7 +4,7 @@ import Home from './Home';
 import RequestersPage from './RequestersPage';
 import DonationFormWithHistory from './DonationForm';
 import Auth from './Auth';
-
+import RequestDetailsPage from './RequestersPageDetails';
 function App() {
   const [userPrincipal, setUserPrincipal] = useState(null);
 
@@ -20,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />  {/* Use element prop instead of component */}
             <Route path="/requesters" element={<RequestersPage />} />
             <Route path="/donation-form" element={<DonationFormWithHistory userPrincipal={userPrincipal} />} />
+            <Route path="/request/:id" element={<RequestDetailsPage />} />
           </Routes>
         ) : (
           <Auth onSignIn={handleSignIn} />
