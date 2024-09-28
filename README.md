@@ -1,59 +1,106 @@
-# `gift_care`
 
-Welcome to your new `gift_care` project and to the Internet Computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
+# GiftCare - Restoring Trust in Charitable Giving
 
-To get started, you might want to explore the project directory structure and the default configuration file. Working with this project in your development environment will not affect any production deployment or identity tokens.
+In Indonesia, widespread corruption in social assistance programs has severely eroded public trust. Funds meant to support the vulnerable are often misappropriated by corrupt officials, leaving those in need without aid. As a result, donors are increasingly disillusioned, doubting whether their contributions will ever reach the intended recipients.
 
-To learn more before you start working with `gift_care`, see the following documentation available online:
+GiftCare solves this problem by leveraging blockchain technology to ensure transparency, accountability, and community involvement in charitable giving. Built on the Internet Computer Protocol (ICP), our platform provides a decentralized solution where every donation is securely tracked, and every recipient is verified.
 
-- [Quick Start](https://internetcomputer.org/docs/current/developer-docs/setup/deploy-locally)
+## The Problems We Solve
+
+1. **Corruption in Aid Distribution**  
+   Traditional social assistance programs are vulnerable to corruption, leading to misused funds and a lack of support for those in need.
+
+2. **Lack of Transparency**  
+   Donors often lack visibility into how their contributions are used, leading to distrust and uncertainty about the impact of their donations.
+
+3. **Disengaged Communities**  
+   Charitable giving often lacks community involvement, with little opportunity for donors to participate in decision-making or directly support causes they care about.
+
+## GiftCare's Solution
+
+GiftCare addresses these issues by creating a transparent and decentralized platform for charitable giving:
+
+1. **Nomination System**  
+   Recipients in need post their requests for aid, providing transparency about their situation and needs. The GiftCare community reviews these requests to ensure they are genuine.
+
+2. **Community Voting**  
+   Community members actively participate in the decision-making process by casting votes to prioritize aid distribution. This ensures that the most urgent cases receive attention, with full transparency in the voting process.
+
+3. **Blockchain-Powered Transparency**  
+   All donations and transactions are tracked on the blockchain, providing an immutable record that ensures every contribution reaches the intended recipient without the risk of misuse.
+
+4. **Leaderboards for Prioritization**  
+   Based on community votes, recipients are ranked on a leaderboard that highlights the most urgent cases. Donors can choose to support anyone, regardless of their position on the leaderboard.
+
+---
+
+## Getting Started with `gift_care`
+
+Welcome to your new `gift_care` project, part of the Internet Computer development community! This README provides an overview of both the mission of GiftCare and technical instructions to help you start working on the project.
+
+### Project Setup
+
+By default, creating a new project adds this README and some template files to your project directory. You can customize these files to speed up the development cycle and include your own code. To get started, explore the project directory structure and review the default configuration file. Any changes you make in your development environment won’t affect the production deployment or identity tokens.
+
+### Documentation
+
+To learn more before you start working with `gift_care`, check out the following resources:
+
+- [Quick Start Guide](https://internetcomputer.org/docs/current/developer-docs/setup/deploy-locally)
 - [SDK Developer Tools](https://internetcomputer.org/docs/current/developer-docs/setup/install)
-- [Motoko Programming Language Guide](https://internetcomputer.org/docs/current/motoko/main/motoko)
+- [Motoko Programming Guide](https://internetcomputer.org/docs/current/motoko/main/motoko)
 - [Motoko Language Quick Reference](https://internetcomputer.org/docs/current/motoko/main/language-manual)
 
-If you want to start working on your project right away, you might want to try the following commands:
+---
 
-```bash
-cd gift_care/
-dfx help
-dfx canister --help
-```
+## Running the Project Locally
 
-## Running the project locally
+To test your project locally, follow these steps:
 
-If you want to test your project locally, you can use the following commands:
+1. **Start the Local Replica**  
+   Run the replica in the background:
+   ```bash
+   dfx start --background
+   ```
 
-```bash
-# Starts the replica, running in the background
-dfx start --background
+2. **Deploy Canisters**  
+   Deploy your canisters to the replica and generate the candid interface:
+   ```bash
+   dfx deploy
+   ```
 
-# Deploys your canisters to the replica and generates your candid interface
-dfx deploy
-```
+3. **Access the Application**  
+   After the deployment, your application will be available at:  
+   `http://localhost:4943?canisterId={asset_canister_id}`
 
-Once the job completes, your application will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
+4. **Generate Candid Interface**  
+   If you’ve made changes to the backend canister, generate a new candid interface:
+   ```bash
+   npm run generate
+   ```
 
-If you have made changes to your backend canister, you can generate a new candid interface with
+   This is recommended before starting the frontend development server and will automatically run any time you deploy with `dfx deploy`.
 
-```bash
-npm run generate
-```
+5. **Start the Frontend Development Server**  
+   To start a development server for the frontend:
+   ```bash
+   npm start
+   ```
 
-at any time. This is recommended before starting the frontend development server, and will be run automatically any time you run `dfx deploy`.
+   The frontend will be available at `http://localhost:8080`, and API requests will be proxied to the replica at port 4943.
 
-If you are making frontend changes, you can start a development server with
+---
 
-```bash
-npm start
-```
+### Frontend Environment Variables
 
-Which will start a server at `http://localhost:8080`, proxying API requests to the replica at port 4943.
+If you’re hosting frontend code without DFX, make sure that your project doesn’t fetch the root key in production by making one of the following adjustments:
 
-### Note on frontend environment variables
+- Set `DFX_NETWORK` to `ic` if using Webpack.
+- Use a preferred method to replace `process.env.DFX_NETWORK` in the autogenerated declarations.
+- Modify `dfx.json` by setting `canisters -> {asset_canister_id} -> declarations -> env_override` to a string.
 
-If you are hosting frontend code somewhere without using DFX, you may need to make one of the following adjustments to ensure your project does not fetch the root key in production:
+---
 
-- set`DFX_NETWORK` to `ic` if you are using Webpack
-- use your own preferred method to replace `process.env.DFX_NETWORK` in the autogenerated declarations
-  - Setting `canisters -> {asset_canister_id} -> declarations -> env_override to a string` in `dfx.json` will replace `process.env.DFX_NETWORK` with the string in the autogenerated declarations
-- Write your own `createActor` constructor
+## Contributing to GiftCare
+
+GiftCare is an open-source project, and we welcome contributions from the community. Feel free to open issues, suggest improvements, or submit pull requests to help improve the platform. Together, we can restore trust in charitable giving and ensure that help reaches those who need it most.
